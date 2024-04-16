@@ -4,7 +4,11 @@ import { useEffect, useState } from 'react';
 import { Input } from '../Input';
 import { getCityByNameService, CityProps } from '../../services/getCityByNameService';
 
-export function SelectCity({ onSelect }) {
+interface Props {
+  onSelect: (item: CityProps)=> void;
+}
+
+export function SelectCity({ onSelect }: Props) {
   const [city, setCity] = useState<CityProps[]>([]);
   const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +42,7 @@ export function SelectCity({ onSelect }) {
       <div className='select-list'>
         {
           city[0] &&
-          <button type="button" key={city[0].id} onClick={() => onSelect(city)}>
+          <button type="button" key={city[0].id} onClick={() => onSelect(city[0])}>
             <p>{city[0].name}</p>
           </button>
         }
